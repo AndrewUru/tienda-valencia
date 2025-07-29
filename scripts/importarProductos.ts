@@ -38,7 +38,7 @@ const productos = [
     imagen:
       "https://elsaltoweb.es/wp-content/uploads/2025/07/camiseta-valencia-2025.webp",
     variantes: ["M", "L", "XL"],
-    destacado: false,
+    destacado: true,
     activo: true,
   },
 

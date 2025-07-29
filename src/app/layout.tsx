@@ -1,3 +1,4 @@
+//C:\tienda-valencia\src\app\layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -29,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <main className="max-w-6xl mx-auto">{children}</main>
+        <main className="max-w-6xl mx-auto pt-24 pb-24">{children}</main>
       </body>
     </html>
   );
