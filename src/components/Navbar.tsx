@@ -1,98 +1,44 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import Image from "next/image";
+import { Home, Search, ShoppingCart, User } from "lucide-react";
 
 export default function Navbar() {
-  const [isAtTop, setIsAtTop] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsAtTop(window.scrollY < 100);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <nav
-      className={`fixed left-0 w-full z-50 transition-all duration-500 ${
-        isAtTop ? "bottom-0" : "top-0"
-      } bg-gradient-to-r from-blue-900 to-blue-700 text-white p-4 shadow-lg`}
-    >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={40}
-              height={40}
-              className="object-contain"
-            />
-            <span className="text-2xl font-bold hover:text-blue-200 transition-colors">
-              SportZone Valencia
-            </span>
-          </div>
+    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/80 dark:bg-black/80 border-b border-neutral-200 dark:border-neutral-800 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        {/* Logo o Home */}
+        <Link
+          href="/"
+          className="text-black dark:text-white hover:text-orange-500 transition-colors"
+        >
+          <Home className="w-6 h-6" />
         </Link>
 
-        {/* Navigation Links */}
-        <ul className="hidden md:flex gap-8 text-sm font-medium">
-          {[
-            ["Inicio", "/"],
-            ["Fútbol", "/futbol"],
-            ["Basketball", "/basketball"],
-            ["Running", "/running"],
-            ["Fitness", "/fitness"],
-          ].map(([label, href]) => (
-            <li key={label}>
-              <Link
-                href={href}
-                className="hover:text-blue-200 transition-colors border-b-2 border-transparent hover:border-blue-200 pb-1"
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Link
-              href="/ofertas"
-              className="bg-red-600 px-3 py-1 rounded-full hover:bg-red-500 transition-colors"
-            >
-              Ofertas
-            </Link>
-          </li>
-        </ul>
-
-        {/* Actions */}
-        <div className="flex items-center gap-4">
+        {/* Navegación principal */}
+        <div className="flex items-center gap-6 text-black dark:text-white">
           <Link
             href="/buscar"
-            className="hover:text-blue-200 transition-colors"
+            className="hover:text-orange-500 transition-colors"
           >
-            <span className="text-xl">🔍</span>
+            <Search className="w-6 h-6" />
           </Link>
           <Link
             href="/carrito"
-            className="hover:text-blue-200 transition-colors relative"
+            className="hover:text-orange-500 transition-colors relative"
           >
-            <span className="text-xl">🛒</span>
-            <span className="absolute -top-2 -right-2 bg-red-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              3
+            <ShoppingCart className="w-6 h-6" />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-xs text-white w-4 h-4 flex items-center justify-center rounded-full">
+              2
             </span>
           </Link>
           <Link
             href="/cuenta"
-            className="hover:text-blue-200 transition-colors"
+            className="hover:text-orange-500 transition-colors"
           >
-            <span className="text-xl">👤</span>
+            <User className="w-6 h-6" />
           </Link>
         </div>
-
-        {/* Mobile Menu Button */}
-        <button className="md:hidden text-xl">☰</button>
       </div>
     </nav>
   );

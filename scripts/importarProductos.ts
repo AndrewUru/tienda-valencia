@@ -1,4 +1,3 @@
-// scripts/importarProductos.ts
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, setDoc, doc } from "firebase/firestore";
 
@@ -15,8 +14,95 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Simula productos a importar
-const productos = [
+// Productos base (como los que ya tienes)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const productos: any[] = [
+  {
+    id: "1",
+    nombre: "Nike Air Max 270",
+    precio: 159.99,
+    precioOriginal: 199.99,
+    imagen: "/nike-air-max.webp",
+    categoria: "running",
+    marca: "Nike",
+    rating: 4.8,
+    reviews: 234,
+    descuento: 20,
+    nuevo: true,
+    stock: 15,
+    colores: ["negro", "blanco", "azul"],
+    tallas: ["39", "40", "41", "42", "43"],
+  },
+  {
+    id: "2",
+    nombre: "Adidas Ultraboost 23",
+    precio: 179.99,
+    imagen: "/api/placeholder/300/300",
+    categoria: "running",
+    marca: "Adidas",
+    rating: 4.9,
+    reviews: 189,
+    bestseller: true,
+    stock: 8,
+    colores: ["negro", "gris"],
+    tallas: ["38", "39", "40", "41", "42"],
+  },
+  {
+    id: "3",
+    nombre: "Jordan Retro 1 High",
+    precio: 229.99,
+    imagen: "/api/placeholder/300/300",
+    categoria: "basketball",
+    marca: "Jordan",
+    rating: 4.7,
+    reviews: 156,
+    stock: 12,
+    colores: ["rojo", "negro", "blanco"],
+    tallas: ["40", "41", "42", "43", "44"],
+  },
+  {
+    id: "4",
+    nombre: "Puma Future Z 1.3",
+    precio: 199.99,
+    precioOriginal: 249.99,
+    imagen: "/api/placeholder/300/300",
+    categoria: "futbol",
+    marca: "Puma",
+    rating: 4.6,
+    reviews: 92,
+    descuento: 20,
+    stock: 6,
+    colores: ["azul", "amarillo"],
+    tallas: ["39", "40", "41", "42"],
+  },
+  {
+    id: "5",
+    nombre: "Nike Metcon 9",
+    precio: 129.99,
+    imagen: "/nike-metcon.webp",
+    categoria: "fitness",
+    marca: "Nike",
+    rating: 4.5,
+    reviews: 78,
+    nuevo: true,
+    stock: 20,
+    colores: ["negro", "rosa"],
+    tallas: ["36", "37", "38", "39", "40"],
+  },
+  {
+    id: "6",
+    nombre: "Adidas Copa Mundial",
+    precio: 149.99,
+    imagen: "/adidas-copa.webp",
+    categoria: "futbol",
+    marca: "Adidas",
+    rating: 4.9,
+    reviews: 312,
+    bestseller: true,
+    stock: 25,
+    colores: ["negro"],
+    tallas: ["39", "40", "41", "42", "43", "44"],
+  },
   {
     id: "camiseta-argentina-2024",
     nombre: "Camiseta Argentina 2024",
@@ -211,10 +297,27 @@ const productos = [
   },
 ];
 
+// 🔧 Añade campos requeridos por el frontend con valores por defecto
+const productosConValoresDefecto = productos.map((p) => ({
+  ...p,
+  marca: p.marca || "Genérica",
+  rating: p.rating ?? 4.5,
+  reviews: p.reviews ?? 0,
+  stock: p.stock ?? 10,
+  colores: p.colores ?? [],
+  tallas: p.tallas ?? [],
+}));
+
+// 🔁 Importar todos los productos a Firestore
 async function importar() {
-  for (const producto of productos) {
-    await setDoc(doc(collection(db, "productos"), producto.id), producto);
-    console.log(`✅ Producto importado: ${producto.nombre}`);
+  try {
+    for (const producto of productosConValoresDefecto) {
+      await setDoc(doc(collection(db, "productos"), producto.id), producto);
+      console.log(`✅ Producto importado: ${producto.nombre}`);
+    }
+    console.log("🎉 Todos los productos se han importado correctamente.");
+  } catch (error) {
+    console.error("❌ Error al importar productos:", error);
   }
 }
 

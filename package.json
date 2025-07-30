@@ -1,14 +1,17 @@
 {
   "name": "tienda-valencia",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "importar": "node --loader ts-node/esm scripts/importarProductos.ts"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "firebase": "^12.0.0",
     "lucide-react": "^0.534.0",
     "next": "15.4.4",
@@ -18,12 +21,13 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.19.9",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.4",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

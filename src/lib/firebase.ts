@@ -24,4 +24,8 @@ export type Producto = {
   destacado?: boolean;
   variantes?: string[];
   activo?: boolean;
+  marca?: string;
+  rating?: number;
+  reviews?: number;
+  stock?: number;
 };

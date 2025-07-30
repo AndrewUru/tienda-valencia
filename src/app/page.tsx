@@ -1,26 +1,30 @@
-import { getDestacados } from "@/lib/firebase";
-import ProductoCard from "@/components/ProductoCard";
 import Hero from "@/components/Hero";
+import Destacados from "@/components/Destacados";
+import { getDestacados } from "@/lib/firebase"; // O tu función real
 
 export default async function HomePage() {
-  const productos = await getDestacados();
+  const productosFromDb = await getDestacados(); // Obtener los productos destacados
+  // Asegurarse de que 'categoria' siempre sea string
+  const productos = productosFromDb.map((producto) => ({
+    ...producto,
+    categoria: producto.categoria ?? "",
+    descripcion: producto.descripcion ?? "",
+    destacado: producto.destacado ?? false,
+    variantes: producto.variantes ?? [],
+    activo: producto.activo ?? false,
+    marca: producto.marca ?? "",
+    rating: producto.rating ?? 0,
+    reviews: producto.reviews ?? 0,
+    stock: producto.stock ?? 0,
+  }));
 
   return (
     <>
-      {/* Hero fuera del contenedor limitado */}
-      <div className="w-screen max-w-none overflow-x-hidden">
-        <Hero />
-      </div>
+      {/* Hero Section */}
+      <Hero />
 
-      {/* Contenido con padding y ancho limitado */}
-      <main className="p-6 max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Destacados</h1>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {productos.map((producto) => (
-            <ProductoCard key={producto.id} producto={producto} />
-          ))}
-        </div>
-      </main>
+      {/* Productos destacados */}
+      <Destacados productos={productos} />
     </>
   );
 }
