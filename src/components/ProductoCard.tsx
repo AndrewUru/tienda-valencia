@@ -7,7 +7,7 @@ export interface Producto {
   nombre: string;
   precio: number;
   imagen: string;
-  categoria: string;
+  categoria?: string;
   descripcion?: string;
   variantes?: string[];
   destacado?: boolean;
