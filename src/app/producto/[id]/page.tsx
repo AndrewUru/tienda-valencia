@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { productos } from "@/lib/productos-json";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 
-// ✅ Usamos `any` para evitar conflictos con validaciones externas de Vercel
 const ProductoPage = ({ params }: { params: any }) => {
   const producto = productos.find((p) => p.id === params.id);
 
