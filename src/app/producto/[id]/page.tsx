@@ -1,36 +1,21 @@
 // src/app/producto/[id]/page.tsx
 
-import { db } from "@/firebase/config";
-import { doc, getDoc } from "firebase/firestore";
-import { Producto } from "@/lib/firebase";
+// ✅ Opción sin Firestore para desarrollo/despliegue sin errores
+import { productos } from "@/lib/productos-json"; // ← este archivo exporta tu array de productos
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 
-// ✅ Tipado compatible con Next.js App Router
-export default async function ProductoPage({
-  params,
-}: {
+interface ProductoPageProps {
   params: { id: string };
-}) {
-  const ref = doc(db, "productos", params.id);
-  const snapshot = await getDoc(ref);
+}
 
-  if (!snapshot.exists()) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-xl font-semibold mb-4">Producto no encontrado</h2>
-          <Link href="/" className="text-blue-600 underline">
-            <ArrowLeft className="inline w-4 h-4 mr-1" />
-            Volver al inicio
-          </Link>
-        </div>
-      </div>
-    );
-  }
+export default function ProductoPage({ params }: ProductoPageProps) {
+  const producto = productos.find((p) => p.id === params.id);
 
-  const producto = { id: snapshot.id, ...snapshot.data() } as Producto;
+  if (!producto) return notFound();
+
   const mensaje = encodeURIComponent(
     `Hola, quiero información sobre ${producto.nombre}`
   );
