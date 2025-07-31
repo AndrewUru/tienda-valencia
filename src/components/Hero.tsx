@@ -42,7 +42,7 @@ export default function Hero() {
       title: "Estilo y Rendimiento",
       subtitle: "Tu ropa deportiva favorita, directo desde Instagram",
       description:
-        "Distribuimos las mejores marcas en moda y deporte en Valencia y toda Europa con calidad premium",
+        "Distribuimos las mejores marcas de deporte en Valencia y toda Europa",
       cta: "Ver Productos",
       ctaLink: "/productos",
       bg: "bg-gradient-to-br from-blue-900 via-purple-900 to-black",

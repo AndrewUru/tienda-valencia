@@ -375,7 +375,7 @@ export default function ProductosSection({
             Nuestros <span className="text-blue-400">Productos</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Descubre nuestra selección premium de tecnología y electrónicos
+            Descubre nuestra selección premium de indumentaria depotiva
           </p>
         </div>
 

@@ -1,6 +1,10 @@
 import Hero from "@/components/Hero";
 import Destacados from "@/components/Destacados";
 import { getDestacados } from "@/lib/firebase"; // O tu función real
+import Beneficios from "@/components/Beneficios";
+import Testimonios from "@/components/Testimonios";
+import Categorias from "@/components/Categorías";
+import CTAExtra from "@/components/Ctaextra";
 
 export default async function HomePage() {
   const productosFromDb = await getDestacados(); // Obtener los productos destacados
@@ -22,9 +26,12 @@ export default async function HomePage() {
     <>
       {/* Hero Section */}
       <Hero />
-
       {/* Productos destacados */}
       <Destacados productos={productos} />
+      <Beneficios />
+      <Categorias />
+      <Testimonios />
+      <CTAExtra />
     </>
   );
 }
