@@ -117,7 +117,7 @@ export default function Hero() {
   const currentSlideData = slides[currentSlide];
 
   return (
-    <section className="relative h-[90vh] overflow-hidden bg-black">
+    <section className="relative min-h-screen overflow-hidden bg-black pt-18">
       {/* Background Images with Parallax Effect */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
