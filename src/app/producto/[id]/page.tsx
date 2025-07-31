@@ -1,3 +1,5 @@
+// src/app/producto/[id]/page.tsx
+
 import { db } from "@/firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { Producto } from "@/lib/firebase";
@@ -5,11 +7,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 
-interface PageProps {
+// ✅ Tipado compatible con Next.js App Router
+export default async function ProductoPage({
+  params,
+}: {
   params: { id: string };
-}
-
-export default async function ProductoPage({ params }: PageProps) {
+}) {
   const ref = doc(db, "productos", params.id);
   const snapshot = await getDoc(ref);
 
